@@ -10,6 +10,7 @@ namespace GDC
 
         public MoveingState(Player player) : base(player)
         {
+            //Finds the rigibody on the player
             rb = _player.GetComponent<Rigidbody>();
         }
 
