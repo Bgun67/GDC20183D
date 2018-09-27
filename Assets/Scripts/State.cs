@@ -8,10 +8,12 @@ namespace GDC
     public class State
     {
         protected Player _player;
+        protected Rigidbody _rb;
 
         public State(Player player)
         {
             _player = player;
+            _rb = player.GetComponent<Rigidbody>();
         }
 
         public virtual void Update()
