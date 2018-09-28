@@ -15,7 +15,7 @@ namespace GDC
             _player = player;
             _rb = player.GetComponent<Rigidbody>();
         }
-
+        
         public virtual void Update()
         {
 
