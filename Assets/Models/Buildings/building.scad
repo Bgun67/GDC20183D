@@ -1,15 +1,13 @@
 //Building Settings
 width = 22;
 depth = 22;
-height = 50;
+height = 60;
 stories = 8;
 
 //Window Settings
 windowheight = 5;
 windowwidth = 5;
 windowdepth = 0.5;
-windowspacefrombottom = 0;
-windowspacefromtop = 0;
 numberofwindows = 2;
 
 //Door Settings
@@ -29,12 +27,15 @@ for(r=[0:90:359]){
           cube([doorwidth,doordepth+1,doorheight+1],center=true);
         }
       }
-    for(s=[1:1:stories])
+    for(s=[0:1:stories - 1])
       for(n=[0:1:numberofwindows -1]){
-        translate([width/2,(width-windowwidth*numberofwindows)/(numberofwindows+1) * (n + 1) + (n + 1/2) * windowwidth - width/2,(height-windowspacefrombottom-windowspacefromtop-doorheight)/(stories+1)*(s)+windowspacefrombottom+doorheight])
+        translate([width/2,CalculateEvenSpacing(totalWidth = width, itemWidth = windowwidth, itemCount = numberofwindows, itemIndex = n), CalculateEvenSpacing(totalWidth = height - doorheight, itemWidth = windowheight, itemCount = stories, itemIndex = s) + doorheight/2 + height/2])
         cube([windowdepth,windowwidth,windowheight],center=true);
         
       }
     }
   }
 }
+
+function CalculateEvenSpacing(totalWidth, itemWidth, itemCount, itemIndex) =
+        (totalWidth-itemWidth*itemCount)/(itemCount+1) * (itemIndex + 1) + (itemIndex + 1/2) * itemWidth - totalWidth/2;
