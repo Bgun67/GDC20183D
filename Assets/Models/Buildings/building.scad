@@ -8,7 +8,7 @@ stories = 8;
 windowheight = 5;
 windowwidth = 5;
 windowdepth = 0.5;
-numberofwindows = 2;
+numberofwindows = [2,2,3,3];
 windowonsides = [1,1,0,0];
 
 //Door Settings
@@ -30,8 +30,8 @@ for(r=[0:90:359]){
       }
       if(windowonsides[r/90] == 1)
         for(s=[0:1:stories - 1])
-          for(n=[0:1:numberofwindows -1]){
-            translate([width(r)/2,CalculateEvenSpacing(totalWidth = width(r-90), itemWidth = windowwidth, itemCount = numberofwindows, itemIndex = n), CalculateEvenSpacing(totalWidth = height - doorheight, itemWidth = windowheight, itemCount = stories, itemIndex = s) + doorheight/2 + height/2])
+          for(n=[0:1:numberofwindows[r/90] -1]){
+            translate([width(r)/2,CalculateEvenSpacing(totalWidth = width(r-90), itemWidth = windowwidth, itemCount = numberofwindows[r/90], itemIndex = n), CalculateEvenSpacing(totalWidth = height - doorheight, itemWidth = windowheight, itemCount = stories, itemIndex = s) + doorheight/2 + height/2])
             cube([windowdepth,windowwidth,windowheight],center=true);
           }
     }
