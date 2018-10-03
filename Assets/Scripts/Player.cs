@@ -12,6 +12,9 @@ namespace GDC
         [SerializeField] float _RunSpeed;
         [SerializeField] float _SprintSpeed;
         [SerializeField] float _WalkSpeed;
+        [SerializeField] float _Health;
+        [SerializeField] float _LowHealthWarning;
+
 
         //Public get and sets
         public float SprintSpeed
@@ -50,6 +53,30 @@ namespace GDC
                 _RunSpeed = value;
             }
         }
+        public float Health
+        {
+            get
+            {
+                return _Health;
+            }
+
+            set
+            {
+                _Health = value;
+            }
+        }
+        public float LowHealthWarning
+        {
+            get
+            {
+                return _LowHealthWarning;
+            }
+
+            set
+            {
+                _LowHealthWarning = value;
+            }
+        }
 
         // Use this for initialization
         void Start()
@@ -69,6 +96,18 @@ namespace GDC
         {
             _stateMachine.ProcessStateChanges();
             _stateMachine.ProcessState();
+        }
+
+        void ProcessHealth()
+        {
+            if(_Health <= 0)
+            {
+                //add death state isreplaceing = true
+            }
+            else if(_Health < _LowHealthWarning)
+            {
+                //low health waring effect (add bool)
+            }
         }
     }
 }
