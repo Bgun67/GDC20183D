@@ -11,14 +11,13 @@ namespace GDC
 
         Vector2 _mouseAbsolute;
         Vector2 _smoothMouse;
-        private int _layerMask = ~(1 << 10);
+        
 
         //todo Moveto Settings options
         [SerializeField] bool    _lockCursor = true;
         [SerializeField] Vector2 _clampInDegrees = new Vector2(360, 180);
         [SerializeField] Vector2 _sensitivity = new Vector2(1, .7f);
         [SerializeField] Vector2 _smoothing = new Vector2(2, 2);
-        [SerializeField] Vector3 _offset = new Vector3(0, 1.5f, -4);
         Vector2 _targetDirection;
         Vector2 _targetCharacterDirection;
         Vector3 _targetCameraLocalPosition;
@@ -83,37 +82,12 @@ namespace GDC
             // Move camera
             _camera.transform.localRotation = (Quaternion.AngleAxis(-_mouseAbsolute.y, targetOrientation * Vector3.right) * targetOrientation );
             //Vector3 targetCamPos = _player.transform.position + _camera.transform.localRotation * _offset;
-
-            _camera.transform.localPosition = _camera.transform.localRotation * _offset;
-
-
-
-            RaycastHit wallHit = new RaycastHit();//linecast from your player to camera to find collisions.
-            if (Physics.Linecast(_camera.transform.position, _player.transform.position, out wallHit, _layerMask))
-            {
-                Debug.Log("Moveing Camera");
-                Vector3 s = (_player.transform.position - wallHit.point).normalized * .25f;
-                Vector3 targetCamHitPos = wallHit.point + s;
-
-                _camera.transform.position = wallHit.point + s;
-
-
-                Debug.DrawLine(_camera.transform.position, _player.transform.position, Color.red);
-            }
-            else
-            {
-                Debug.DrawLine(_camera.transform.position, _player.transform.position, Color.green);
-            }
-
-
-
-
-
-
-
-
+            
             var yRotation = Quaternion.AngleAxis(_mouseAbsolute.x, Vector3.up);
             _player.transform.localRotation = yRotation * targetCharacterOrientation;
         }
+
+
+
     }
 }
