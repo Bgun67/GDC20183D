@@ -9,7 +9,7 @@ namespace GDC
 
         Player _player;
         [SerializeField] Vector3 _offset = new Vector3(0, 1.5f, -4);
-        List<Collision> _collidingObj = new List<Collision>();
+        List<Collider> _collidingObj = new List<Collider>();
         private int _layerMask = ~(1 << 10);
 
         // Use this for initialization
@@ -42,7 +42,6 @@ namespace GDC
 
 
                 Debug.Log("Moveing Camera");
-                //Vector3 s = (_player.transform.position - wallHit.point).normalized * .25f;
                 Vector3 s = -wallHit.normal * .25f;
                 Vector3 targetCamHitPos = wallHit.point + s;
 
@@ -55,6 +54,26 @@ namespace GDC
             {
                 Debug.DrawLine(transform.position, _player.transform.position, Color.green);
             }
+
+            Debug.Log(_collidingObj.Count);
+
+            foreach(Collider col in _collidingObj)
+            {
+                Debug.DrawLine(col.ClosestPointOnBounds(transform.position), _player.transform.position, Color.red);
+                
+            }
+
+        }
+        
+        private void OnTriggerEnter(Collider collider)
+        {
+            _collidingObj.Add(collider);
+            
+        }
+        
+        private void OnTriggerExit(Collider collider)
+        {
+            _collidingObj.Remove(collider);
         }
     }
 
