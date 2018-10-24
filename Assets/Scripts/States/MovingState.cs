@@ -6,26 +6,19 @@ namespace GDC
 {
     public class MovingState : State
     {
-        //hidden _player, _rb
-        GameObject _camera;
-
         Vector2 _mouseAbsolute;
         Vector2 _smoothMouse;
-        
+        Vector2 _targetCharacterDirection = Vector2.zero;
 
         //todo Moveto Settings options
         [SerializeField] bool    _lockCursor = true;
         [SerializeField] Vector2 _clampInDegrees = new Vector2(360, 180);
         [SerializeField] Vector2 _sensitivity = new Vector2(1, .7f);
         [SerializeField] Vector2 _smoothing = new Vector2(2, 2);
-        Vector2 _targetDirection;
-        Vector2 _targetCharacterDirection;
-        Vector3 _targetCameraLocalPosition;
-
-
+        
         public MovingState(Player player) : base(player)
         {
-            _camera = _player.transform.Find("Main Camera").gameObject;
+
         }
 
         public override void Update()
@@ -48,7 +41,7 @@ namespace GDC
             }
 
             // Allow the script to clamp based on a desired target value.
-            var targetOrientation = Quaternion.Euler(_targetDirection);
+            //var targetOrientation = Quaternion.Euler(_targetDirection);
             var targetCharacterOrientation = Quaternion.Euler(_targetCharacterDirection);
 
             // Get raw mouse input for a cleaner reading on more sensitive mice.
@@ -72,22 +65,9 @@ namespace GDC
             if (_clampInDegrees.y < 360)
                 _mouseAbsolute.y = Mathf.Clamp(_mouseAbsolute.y, -_clampInDegrees.y * 0.45f, _clampInDegrees.y * 0.55f);
 
-
-            
-
-
-
-
-
-            // Move camera
-            _camera.transform.localRotation = (Quaternion.AngleAxis(-_mouseAbsolute.y, targetOrientation * Vector3.right) * targetOrientation );
-            //Vector3 targetCamPos = _player.transform.position + _camera.transform.localRotation * _offset;
             
             var yRotation = Quaternion.AngleAxis(_mouseAbsolute.x, Vector3.up);
             _player.transform.localRotation = yRotation * targetCharacterOrientation;
         }
-
-
-
     }
 }
