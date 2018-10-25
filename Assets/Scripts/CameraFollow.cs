@@ -15,35 +15,38 @@ namespace GDC
         [Range(0, 1)]
         [SerializeField] float _cameraSmooth;
     
-        private int _layerMask = ~(1 << 10);
+        int _layerMask = ~(1 << 10);
 
         Vector2 _mouseAbsolute;
         Vector2 _smoothMouse;
-
-        private Vector3 velocity = Vector3.zero;
+        Vector3 velocity = Vector3.zero;
 
         [SerializeField] Vector2 _sensitivity = new Vector2(1, .7f); //move to settings
         [SerializeField] Vector2 _smoothing = new Vector2(2, 2);
         Vector3 lastPos;// = Vector3.zero;
         Quaternion lastRot;// = Quaternion.identity;
 
+        Rigidbody rb;
+
+        public Transform _lookAtTarget;
+
         // Use this for initialization
         void Start()
         {
             _player = transform.parent.gameObject.GetComponent<Player>();
+            rb = GetComponent<Rigidbody>();
         }
 
         // Update is called once per frame
         void Update()
         {
-
+            
         }
 
         private void FixedUpdate()
         {
             //TODO: add cutscene suport
             GameplayCamera();
-
         }
 
         //standard follow cam
@@ -64,40 +67,59 @@ namespace GDC
             transform.localRotation = (Quaternion.AngleAxis(-_mouseAbsolute.y, Vector3.right));
             transform.localPosition = transform.localRotation * _offset;
 
-            RaycastHit wallHit = new RaycastHit();//linecast from your player to camera to find collisions.
-
+            RaycastHit wallHit;//linecast from your player to camera to find collisions.
             Vector3 targetPos = lastPos;
-            //- (_player.transform.position - transform.position).normalized
+
+            
             if (Physics.Linecast(_player.transform.position, transform.position - (_player.transform.position - transform.position).normalized, out wallHit, _layerMask))
             {
-                Vector3 s = wallHit.normal * .25f;
+                Vector3 s = wallHit.normal * .4f;
                 transform.position = wallHit.point + s;
-
-                Debug.DrawLine(transform.position, _player.transform.position, Color.red);
+                //Debug.DrawLine(_player.transform.position, wallHit.point, Color.red);
             }
             else
             {
-                Debug.DrawLine(transform.position, _player.transform.position - (_player.transform.position - transform.position).normalized, Color.green);
+                //Debug.DrawLine(_player.transform.position, transform.position - (_player.transform.position - transform.position).normalized, Color.green);
             }
-
+            
 
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, _objectAvoidRange);
             float weight = 0;
             Vector3 vcr = Vector3.zero;
+            
+
             for (int x = 0; x < hitColliders.Length; x++)
             {
-                Vector3 close = hitColliders[x].ClosestPointOnBounds(transform.position);
-                weight = Mathf.Clamp(((close - transform.position)).magnitude / (_objectAvoidRange), 0, 1) * -1 + 1;
-                vcr = -(close - transform.position).normalized * _objectAvoidPower;
-                targetPos += vcr * weight;
+                if (!hitColliders[x].transform.Equals(_player.transform))
+                {
+                    if (wallHit.collider != null)
+                    {
+                        if (!wallHit.collider.transform.Equals(hitColliders[x].transform))
+                        {
+                            Vector3 close = _player.transform.InverseTransformPoint(hitColliders[x].ClosestPointOnBounds(transform.position));
+                            weight = Mathf.Clamp(((close - transform.localPosition)).sqrMagnitude / (_objectAvoidRange), 0, 1) * -1 + 1;
+                            vcr = -(close - transform.localPosition).normalized * _objectAvoidPower;
+                            targetPos += vcr * weight;
+                        }
+                    }
+                    else
+                    {
+                        Vector3 close = _player.transform.InverseTransformPoint(hitColliders[x].ClosestPointOnBounds(transform.position));
+                        weight = Mathf.Clamp(((close - transform.localPosition)).sqrMagnitude / (_objectAvoidRange), 0, 1) * -1 + 1;
+                        vcr = -(close - transform.localPosition).normalized * _objectAvoidPower;
+                        targetPos += vcr * weight;
+                    }
+                }
             }
 
-            lastPos = Vector3.SmoothDamp(targetPos, transform.position, ref velocity, _cameraSmooth);
-
-            transform.position = lastPos;
-
-            //TODO: replace with target look at i.e. combat system
-            //transform.LookAt(_player.transform);
+            lastPos = Vector3.SmoothDamp(targetPos, transform.localPosition, ref velocity, _cameraSmooth);
+            
+            rb.transform.localPosition = lastPos;
+            //TODO: Smooth Look Point
+            if (_lookAtTarget)
+            {
+                transform.LookAt(_lookAtTarget);
+            }
         }
     }
 }
