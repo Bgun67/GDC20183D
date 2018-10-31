@@ -15,9 +15,6 @@ namespace GDC
         [SerializeField] float _Health;
         [SerializeField] float _LowHealthWarning;
 
-        [SerializeField] public AudioClip[] footstepClips;
-        public AudioSource footstepSource;
-
 
         //Public get and sets
         public float SprintSpeed
@@ -92,10 +89,6 @@ namespace GDC
         void Update()
         {
 
-        }
-
-        public void FootstepAnim(){
-            footstepSource.PlayOneShot(footstepClips[Random.Range(0,footstepClips.Length)]);
         }
 
         //50hz update loop
