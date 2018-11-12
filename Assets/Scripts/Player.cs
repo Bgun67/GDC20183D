@@ -9,6 +9,9 @@ namespace GDC
         //var decleration
         protected StateMachine _stateMachine;
 
+        [SerializeField] GunBase _primaryGun;
+        [SerializeField] GunBase _secondaryGun;
+
         [SerializeField] float _RunSpeed;
         [SerializeField] float _SprintSpeed;
         [SerializeField] float _WalkSpeed;
@@ -78,6 +81,31 @@ namespace GDC
             }
         }
 
+        public GunBase PrimaryGun
+        {
+            get
+            {
+                return _primaryGun;
+            }
+
+            set
+            {
+                _primaryGun = value;
+            }
+        }
+        public GunBase SecondaryGun
+        {
+            get
+            {
+                return _secondaryGun;
+            }
+
+            set
+            {
+                _secondaryGun = value;
+            }
+        }
+
         // Use this for initialization
         void Start()
         {
@@ -88,7 +116,10 @@ namespace GDC
         // Update is called once per frame
         void Update()
         {
-
+            if (Input.GetKey(KeyCode.C)) 
+            {
+                _primaryGun.Shoot();
+            }
         }
 
         //50hz update loop
