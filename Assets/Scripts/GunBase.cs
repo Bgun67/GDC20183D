@@ -3,21 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GunBase : MonoBehaviour {
-    
-    enum WeaponType
+
+    protected enum WeaponType
     {
         Projectile, Raycast, Melee
     }
 
-    GameObject _projectile;
+    [SerializeField]
+    protected GameObject _projectile;
 
-    [SerializeField] WeaponType _weaponType = WeaponType.Raycast;
+    [SerializeField]
+    protected WeaponType _weaponType = WeaponType.Raycast;
     
     public void Shoot()
     {
-        if (this.isActiveAndEnabled)
+        Debug.Log("ba");
+        if (!this.isActiveAndEnabled)
             return;
-
+        Debug.Log("b");
         if (_weaponType == WeaponType.Projectile)
         {
             ProjectileShoot();
