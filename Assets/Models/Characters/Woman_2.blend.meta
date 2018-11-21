@@ -146,6 +146,7 @@ ModelImporter:
     7400004: walk
     7400006: Hold_Weapon
     7400008: Walk
+    7400010: Look_Up_Down
     9500000: //RootNode
     13700000: braid01Mesh
     13700002: eyebrow010Mesh
