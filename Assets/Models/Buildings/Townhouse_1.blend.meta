@@ -14,7 +14,27 @@ ModelImporter:
     4300000: Cube
     7400000: Default Take
     9500000: //RootNode
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TownHouse1Door
+    second: {fileID: 2100000, guid: fdf3cb6f5b4387f46af65d7393a1adcf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Townhouse1Bricks___bricks-rough-albedo_tif
+    second: {fileID: 2100000, guid: 4d69b302d454e11429122222a0fd38f9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Townhouse1Glass
+    second: {fileID: 2100000, guid: 0b9489646cab0bd4382360e20194ac42, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Townhouse_Auwning__bricks-rough-albedo_tif
+    second: {fileID: 2100000, guid: 5ceb022874fb52441bb5d22084b39fbe, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -86,7 +106,6 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1

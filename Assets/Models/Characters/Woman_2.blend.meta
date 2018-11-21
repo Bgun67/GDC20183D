@@ -154,7 +154,42 @@ ModelImporter:
     13700008: female_muscle_13442Mesh
     13700010: high-polyMesh
     13700012: shoes06Mesh
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: braid01_003
+    second: {fileID: 2100000, guid: 3e53908f1acd3c34f9f2bd19be50e26d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: eyebrow010_002
+    second: {fileID: 2100000, guid: 6a15f5cf62cb62e48b13a070626ebf79, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: eyelashes02_002
+    second: {fileID: 2100000, guid: 3945f524d1cbffe4ba0bdbc734b20af0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: female_casualsuit02_003
+    second: {fileID: 2100000, guid: ec1a7b59f29d0094fa92965ee3f50268, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: female_muscle_13442_002
+    second: {fileID: 2100000, guid: b035f9bc41743a94b93c8b7f61abcef5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: high-poly_003__brown_eye_png
+    second: {fileID: 2100000, guid: f127deaed53c8114fb2356abe1bf3c27, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: shoes06_002
+    second: {fileID: 2100000, guid: 591e0be572646b349842e7de1d911a8c, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -1078,7 +1113,6 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1

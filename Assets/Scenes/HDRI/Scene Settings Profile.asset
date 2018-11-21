@@ -84,7 +84,7 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 2
   fogType:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 2
 --- !u!114 &114559565149175014
 MonoBehaviour:
@@ -185,7 +185,7 @@ MonoBehaviour:
     max: 5
   skyTint:
     m_OverrideState: 1
-    m_Value: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    m_Value: {r: 0.4710306, g: 0.6886792, b: 0.6886792, a: 1}
     hdr: 0
     showAlpha: 1
     showEyeDropper: 1
