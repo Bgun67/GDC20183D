@@ -9,9 +9,15 @@ namespace GDC
         //var decleration
         protected StateMachine _stateMachine;
 
+        [SerializeField] GunBase _primaryGun;
+        [SerializeField] GunBase _secondaryGun;
+
         [SerializeField] float _RunSpeed;
         [SerializeField] float _SprintSpeed;
         [SerializeField] float _WalkSpeed;
+        [SerializeField] float _Health;
+        [SerializeField] float _LowHealthWarning;
+
 
         //Public get and sets
         public float SprintSpeed
@@ -50,6 +56,55 @@ namespace GDC
                 _RunSpeed = value;
             }
         }
+        public float Health
+        {
+            get
+            {
+                return _Health;
+            }
+
+            set
+            {
+                _Health = value;
+            }
+        }
+        public float LowHealthWarning
+        {
+            get
+            {
+                return _LowHealthWarning;
+            }
+
+            set
+            {
+                _LowHealthWarning = value;
+            }
+        }
+
+        public GunBase PrimaryGun
+        {
+            get
+            {
+                return _primaryGun;
+            }
+
+            set
+            {
+                _primaryGun = value;
+            }
+        }
+        public GunBase SecondaryGun
+        {
+            get
+            {
+                return _secondaryGun;
+            }
+
+            set
+            {
+                _secondaryGun = value;
+            }
+        }
 
         // Use this for initialization
         void Start()
@@ -61,7 +116,10 @@ namespace GDC
         // Update is called once per frame
         void Update()
         {
-
+            if (Input.GetKey(KeyCode.C)) 
+            {
+                _primaryGun.Shoot();
+            }
         }
 
         //50hz update loop
@@ -69,6 +127,18 @@ namespace GDC
         {
             _stateMachine.ProcessStateChanges();
             _stateMachine.ProcessState();
+        }
+
+        void ProcessHealth()
+        {
+            if(_Health <= 0)
+            {
+                //add death state isreplaceing = true
+            }
+            else if(_Health < _LowHealthWarning)
+            {
+                //low health waring effect (add bool)
+            }
         }
     }
 }
