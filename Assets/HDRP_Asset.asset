@@ -91,4 +91,5 @@ MonoBehaviour:
       atlasWidth: 4096
       atlasHeight: 4096
   allowShaderVariantStripping: 1
-  diffusionProfileSettings: {fileID: 0}
+  diffusionProfileSettings: {fileID: 11400000, guid: 81a3800965e97984fa29edc90f6dcf92,
+    type: 2}
