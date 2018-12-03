@@ -7,24 +7,59 @@ using IngameDebugConsole;
 public class NavTest : MonoBehaviour
 {
 
-	public GameObject target;
+	public Vector3 target;
 	public NavMeshAgent agent;
+
+	private HelperCover cover;
+
+	private void GoToCover(HelperCover cover)
+	{
+		this.cover = cover;
+		target = cover.transform.position;
+	}
+
+	private void PeakFromCover()
+	{
+		if(cover != null)
+			target = cover.transform.position + cover.peak;
+	}
 
 	//[ConsoleMethod("nav_set_target", "Set target of npc to head towards")]
 	public void SetTarget(GameObject target)
 	{
-		this.target = target;
+		this.target = target.transform.position;
+	}
+
+	public void GetToCover()
+	{
+		HelperCover nearestCover = null;
+		foreach (HelperCover cover in FindObjectsOfType<HelperCover>())//Find nearest cover
+		{
+			if (nearestCover == null)
+				nearestCover = cover;
+			else
+			{
+				if (Vector3.Distance(transform.position, cover.transform.position) < Vector3.Distance(transform.position, nearestCover.transform.position))
+				{
+					nearestCover = cover;
+				}
+			}
+		}
+		GoToCover(nearestCover);
 	}
 
 	// Use this for initialization
 	void Start()
 	{
 		DebugLogConsole.AddCommandInstance("nav_set_target", "Set target of npc to head towards", "SetTarget", this);
+		DebugLogConsole.AddCommandInstance("nav_cover", "Send npcs to nearest cover", "GetToCover", this);
+		DebugLogConsole.AddCommandInstance("nav_peak", "Tell npcs to peak from cover", "PeakFromCover", this);
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		agent.destination = target.transform.position;
+		if (target != null)
+			agent.destination = target;
 	}
 }
