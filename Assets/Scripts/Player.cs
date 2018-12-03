@@ -18,9 +18,10 @@ namespace GDC
         [SerializeField] float _Health;
         [SerializeField] float _LowHealthWarning;
 
+		private bool paused = false;
 
-        //Public get and sets
-        public float SprintSpeed
+		#region Public get and sets
+		public float SprintSpeed
         {
             get
             {
@@ -80,8 +81,9 @@ namespace GDC
                 _LowHealthWarning = value;
             }
         }
+		#endregion
 
-        public GunBase PrimaryGun
+		public GunBase PrimaryGun
         {
             get
             {
@@ -120,6 +122,14 @@ namespace GDC
             {
                 _primaryGun.Shoot();
             }
+			if (Input.GetKeyDown(KeyCode.Escape))
+			{
+				if (!paused)
+					_stateMachine.AddState(new PausedState(this), false);//Pause player
+				else
+					_stateMachine.RemoveState();//Unpause
+				paused = !paused;
+			}
         }
 
         //50hz update loop
