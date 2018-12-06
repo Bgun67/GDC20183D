@@ -18,10 +18,10 @@ public class NavTest : MonoBehaviour
 		target = cover.transform.position;
 	}
 
-	private void PeakFromCover()
+	private void PeekFromCover()
 	{
 		if(cover != null)
-			target = cover.transform.position + cover.peak;
+			target = cover.transform.position + cover.peek;
 	}
 
 	//[ConsoleMethod("nav_set_target", "Set target of npc to head towards")]
@@ -53,7 +53,7 @@ public class NavTest : MonoBehaviour
 	{
 		DebugLogConsole.AddCommandInstance("nav_set_target", "Set target of npc to head towards", "SetTarget", this);
 		DebugLogConsole.AddCommandInstance("nav_cover", "Send npcs to nearest cover", "GetToCover", this);
-		DebugLogConsole.AddCommandInstance("nav_peak", "Tell npcs to peak from cover", "PeakFromCover", this);
+		DebugLogConsole.AddCommandInstance("nav_peek", "Tell npcs to peek from cover", "PeekFromCover", this);
 	}
 
 	// Update is called once per frame
