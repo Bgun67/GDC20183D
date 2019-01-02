@@ -7,16 +7,15 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Finger Print
-  m_Shader: {fileID: 4800000, guid: 6e4ae4064600d784cac1e41a9e6f2e59, type: 3}
+  m_Shader: {fileID: 4800000, guid: 1b82910c452c0cc42a6e7be53ffafda1, type: 3}
   m_ShaderKeywords: _ALBEDOCONTRIBUTION _ALPHATEST_ON _COLORMAP _DISABLE_DBUFFER _EMISSION
     _NORMALMAP_TANGENT_SPACE _NORMALMAP_TANGENT_SPACE0 _NORMALMAP_TANGENT_SPACE1 _NORMALMAP_TANGENT_SPACE2
     _NORMALMAP_TANGENT_SPACE3
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2450
-  stringTagMap:
-    RenderType: TransparentCutout
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses:
   - DistortionVectors
   - TransparentDepthPrepass
@@ -26,6 +25,14 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_3C31097E:
+        m_Texture: {fileID: 2800000, guid: 68decfc62e9080348be87f5f395e7026, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_49C9A82D:
+        m_Texture: {fileID: 2800000, guid: 68decfc62e9080348be87f5f395e7026, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _AmbientOcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -349,6 +356,8 @@ Material:
     m_Floats:
     - Vector1_55D18DBC: 0
     - Vector1_6F652E0E: 10
+    - Vector1_B5C75C03: 0.534
+    - Vector1_E4277239: 0
     - _AORemapMax: 1
     - _AORemapMax0: 1
     - _AORemapMax1: 1
@@ -733,6 +742,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - Color_24D38684: {r: 0, g: 0, b: 0, a: 0}
+    - Color_2B6B40D4: {r: 0, g: 0, b: 0, a: 1}
     - Color_B66373DE: {r: 0, g: 0, b: 0, a: 0}
     - _AmbientOcclusionMapChannelMask: {r: 1, g: 0, b: 0, a: 0}
     - _AmbientOcclusionMapRange: {r: 0, g: 1, b: 0, a: 0}

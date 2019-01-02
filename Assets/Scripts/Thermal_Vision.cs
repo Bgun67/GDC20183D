@@ -7,10 +7,7 @@ public class Thermal_Vision : MonoBehaviour
 	public Camera mainCamera;
 	public Shader thermalObject;
 	public Shader thermalShader;
-	public GameObject[] hotObjects;
 	public float intensity;
-	[Range(0,1)]
-	public int heatCam;
 	public Material material;
 	public Texture2D texture;
 	// Use this for initialization
@@ -27,7 +24,7 @@ public class Thermal_Vision : MonoBehaviour
 	// Postprocess the image
 	void OnRenderImage(RenderTexture source, RenderTexture destination)
 	{
-		
+		material = new Material(thermalObject);
 		Graphics.Blit(source, destination, material);
 		material.SetFloat("_amplification", intensity);
 		material.SetTexture("_MainTex", texture);

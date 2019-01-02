@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 namespace GDC
 {
@@ -17,10 +18,15 @@ namespace GDC
         [SerializeField] float _WalkSpeed;
         [SerializeField] float _Health;
         [SerializeField] float _LowHealthWarning;
+		public bool uvOn;
+		public bool thermalOn;
+
+		public Material[] UVMats;
+		public Material[] thermalMats;
 
 
-        //Public get and sets
-        public float SprintSpeed
+		//Public get and sets
+		public float SprintSpeed
         {
             get
             {
@@ -120,7 +126,15 @@ namespace GDC
             {
                 _primaryGun.Shoot();
             }
-        }
+			if (Input.GetKeyDown(KeyCode.G))
+			{
+				SwitchToUV();
+			}
+			if (Input.GetKeyDown(KeyCode.H))
+			{
+				SwitchToThermal();
+			}
+		}
 
         //50hz update loop
         private void FixedUpdate()
@@ -140,6 +154,64 @@ namespace GDC
                 //low health waring effect (add bool)
             }
         }
-    }
+		//testing code - Needs to be thrown away
+		void SwitchToUV()
+		{
+			//print(shaderOBJ.GetComponent<MeshRenderer>().sharedMaterial.name);
+
+			if (!uvOn)
+			{
+				foreach (Material UVMat in UVMats)
+				{
+					UVMat.SetFloat("Vector1_E4277239", 1);
+				}
+				GameObject.Find("Main Camera").GetComponent<PostProcessVolume>().enabled = true;
+			}
+			else
+			{
+				foreach (Material UVMat in UVMats)
+				{
+					UVMat.SetFloat("Vector1_E4277239", 0);
+				}
+				GameObject.Find("Main Camera").GetComponent<PostProcessVolume>().enabled = false;
+
+			}
+			uvOn = !uvOn;
+		}
+		void SwitchToThermal()
+		{
+
+			if (!thermalOn)
+			{
+				foreach (Material thermalMat in thermalMats)
+				{
+					thermalMat.SetFloat("Vector1_B5C75C03", 1);
+					thermalMat.SetInt("_ZWrite", 0);
+					thermalMat.SetInt("_Cull", (int)UnityEngine.Rendering.CullMode.Off);
+				//"Queue" = "Transparent"
+
+            		thermalMat.SetInt("Queue", (int)UnityEngine.Rendering.RenderQueue.Transparent);
+
+            		thermalMat.SetInt("_ZTest", (int)UnityEngine.Rendering.CompareFunction.Always);
+       					print(thermalMat.GetInt("_ZWrite"));
+					print(thermalMat.GetInt("_ZTest"));
+					print(thermalMat.GetInt("_Cull"));
+
+				}
+				GameObject.Find("Main Camera").GetComponent<PostProcessVolume>().enabled = true;
+			}
+			else
+			{
+				foreach (Material thermalMat in thermalMats)
+				{
+					thermalMat.SetFloat("Vector1_B5C75C03", 0);
+				}
+				GameObject.Find("Main Camera").GetComponent<PostProcessVolume>().enabled = false;
+
+			}
+
+			thermalOn = !thermalOn;
+		}
+	}
 }
 
