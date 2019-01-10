@@ -8,8 +8,8 @@ Material:
   m_PrefabInternal: {fileID: 0}
   m_Name: Finger Print
   m_Shader: {fileID: 4800000, guid: 1b82910c452c0cc42a6e7be53ffafda1, type: 3}
-  m_ShaderKeywords: _ALBEDOCONTRIBUTION _ALPHATEST_ON _COLORMAP _DISABLE_DBUFFER _EMISSION
-    _NORMALMAP_TANGENT_SPACE _NORMALMAP_TANGENT_SPACE0 _NORMALMAP_TANGENT_SPACE1 _NORMALMAP_TANGENT_SPACE2
+  m_ShaderKeywords: _ALBEDOCONTRIBUTION _ALPHATEST_ON _COLORMAP _DISABLE_DBUFFER _NORMALMAP_TANGENT_SPACE
+    _NORMALMAP_TANGENT_SPACE0 _NORMALMAP_TANGENT_SPACE1 _NORMALMAP_TANGENT_SPACE2
     _NORMALMAP_TANGENT_SPACE3
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
@@ -357,7 +357,7 @@ Material:
     - Vector1_55D18DBC: 0
     - Vector1_6F652E0E: 10
     - Vector1_B5C75C03: 0.534
-    - Vector1_E4277239: 0
+    - Vector1_E4277239: 1
     - _AORemapMax: 1
     - _AORemapMax0: 1
     - _AORemapMax1: 1
@@ -410,7 +410,7 @@ Material:
     - _CoatThickness: 0
     - _CullMode: 2
     - _CullModeForward: 2
-    - _Cutoff: 0.01
+    - _Cutoff: 0
     - _DebugEnable: 0
     - _DebugShow: 0
     - _DecalBlend: 0
@@ -494,6 +494,7 @@ Material:
     - _EnableWind: 0
     - _EnergyConservingSpecularColor: 1
     - _GeometricNormalFilteringEnabled: 0
+    - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _HdrpVersion: 1
@@ -593,7 +594,7 @@ Material:
     - _MetallicMapUV: 0
     - _MetallicMapUVLocal: 0
     - _MetallicUseMap: 0
-    - _Mode: 0
+    - _Mode: 1
     - _NormalMapObjSpace: 0
     - _NormalMapShow: 0
     - _NormalMapSpace: 0
@@ -659,6 +660,7 @@ Material:
     - _SmoothnessRemapMin1: 0
     - _SmoothnessRemapMin2: 0
     - _SmoothnessRemapMin3: 0
+    - _SmoothnessTextureChannel: 0
     - _SpecularAAScreenSpaceVariance: 0.1
     - _SpecularAAThreshold: 0.2
     - _SpecularAntiAliasingScreenSpaceVariance: 0.1
