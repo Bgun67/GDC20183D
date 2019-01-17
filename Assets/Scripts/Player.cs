@@ -24,6 +24,7 @@ namespace GDC
         [SerializeField] float _WalkSpeed;
         [SerializeField] float _Health;
         [SerializeField] float _LowHealthWarning;
+
 		public GameObject mainCamera;
 		public GameObject UVCamera;
 		public GameObject thermalCamera;
@@ -130,10 +131,12 @@ namespace GDC
             {
                 _primaryGun.Shoot();
             }
+
 			if (Input.GetKeyDown(KeyCode.G))
 			{
 				ChangeCamera(CameraState.Thermal);
 			}
+
 			if (Input.GetKeyDown(KeyCode.H))
 			{
 				ChangeCamera(CameraState.UV);
