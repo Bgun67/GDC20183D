@@ -22,6 +22,11 @@ namespace GDC
             _rb = _player.GetComponent<Rigidbody2D>();
         }
 
+        public virtual void FixedUpdate()
+        {
+
+        }
+
         public virtual void Update()
         {
 

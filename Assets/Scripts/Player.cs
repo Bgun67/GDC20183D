@@ -11,84 +11,65 @@ namespace GDC
 		UV,
 		Thermal
 	}
+
     public class Player : MonoBehaviour
     {
-        //var decleration
-        protected StateMachine _stateMachine;
+        #region VarDec 
+        protected StateMachine stateMachine;
 
-        [SerializeField] GunBase _primaryGun;
-        [SerializeField] GunBase _secondaryGun;
+        [SerializeField] GunBase primaryGun;
+        [SerializeField] GunBase secondaryGun;
 
-        [SerializeField] float _RunSpeed;
-        [SerializeField] float _SprintSpeed;
-        [SerializeField] float _WalkSpeed;
-        [SerializeField] float _Health;
-        [SerializeField] float _LowHealthWarning;
+        [SerializeField] float health;
+        [SerializeField] float lowHealthWarning;
 
+        public GameObject CameraRig;
 		public GameObject mainCamera;
 		public GameObject UVCamera;
 		public GameObject thermalCamera;
+
+        MoveType    currMoveType = MoveType.run;
 		CameraState currCamState = CameraState.Normal;
 
-		//Public get and sets
-		public float SprintSpeed
-        {
-            get
-            {
-                return _SprintSpeed;
-            }
+        //var set - long bois edition
+        private float[] speed = {
+            3f,     //stealth
+            5f,     //walk
+            7f,     //run
+            10f     //sprint
+        };
 
-            set
-            {
-                _SprintSpeed = value;
-            }
-        }
-        public float WalkSpeed
+        public enum MoveType
         {
-            get
-            {
-                return _WalkSpeed;
-            }
-
-            set
-            {
-                _WalkSpeed = value;
-            }
+            stealth,
+            walk,
+            run,
+            sprint
         }
-        public float RunSpeed
-        {
-            get
-            {
-                return _RunSpeed;
-            }
 
-            set
-            {
-                _RunSpeed = value;
-            }
-        }
+        //Public get and sets
         public float Health
         {
             get
             {
-                return _Health;
+                return health;
             }
 
             set
             {
-                _Health = value;
+                health = value;
             }
         }
         public float LowHealthWarning
         {
             get
             {
-                return _LowHealthWarning;
+                return lowHealthWarning;
             }
 
             set
             {
-                _LowHealthWarning = value;
+                lowHealthWarning = value;
             }
         }
 
@@ -96,106 +77,91 @@ namespace GDC
         {
             get
             {
-                return _primaryGun;
+                return primaryGun;
             }
 
             set
             {
-                _primaryGun = value;
+                primaryGun = value;
             }
         }
         public GunBase SecondaryGun
         {
             get
             {
-                return _secondaryGun;
+                return secondaryGun;
             }
 
             set
             {
-                _secondaryGun = value;
+                secondaryGun = value;
             }
         }
 
-        // Use this for initialization
+        public MoveType CurrMoveType
+        {
+            get
+            {
+                return currMoveType;
+            }
+
+            set
+            {
+                currMoveType = value;
+            }
+        }
+
+        [SerializeField]
+        public float[] Speed
+        {
+            get
+            {
+                return speed;
+            }
+
+            set
+            {
+                speed = value;
+            }
+        }
+        #endregion
+        
         void Start()
         {
-            _stateMachine = new StateMachine(this);                 
-            _stateMachine.AddState(new MovingState(this), false);  //add starting state
+            stateMachine = new StateMachine(this);                 
+            stateMachine.AddState(new GameplayState(this), false);  //add starting state
         }
-
-        // Update is called once per frame
+        
         void Update()
         {
-            if (Input.GetKey(KeyCode.C)) 
-            {
-                _primaryGun.Shoot();
-            }
-
-			if (Input.GetKeyDown(KeyCode.G))
-			{
-				ChangeCamera(CameraState.Thermal);
-			}
-
-			if (Input.GetKeyDown(KeyCode.H))
-			{
-				ChangeCamera(CameraState.UV);
-			}
-		}
-
-        //50hz update loop
-        private void FixedUpdate()
+            stateMachine.ProcessStateChanges();
+            stateMachine.ProcessStateFast();
+        }
+        
+        void FixedUpdate()
         {
-            _stateMachine.ProcessStateChanges();
-            _stateMachine.ProcessState();
+            stateMachine.ProcessStateChanges();
+            stateMachine.ProcessState();
         }
 
-        void ProcessHealth()
-        {
-            if(_Health <= 0)
-            {
-                //add death state isreplaceing = true
-            }
-            else if(_Health < _LowHealthWarning)
-            {
-                //low health waring effect (add bool)
-            }
-        }
-		//testing code - Needs to be thrown away
-		void ChangeCamera(CameraState _state)
+		public void ChangeCamera(CameraState state)
 		{
 			DisableCameras();
-			switch (_state)
+            currCamState = state;
+			switch (state)
 			{
 				case CameraState.Thermal:
-					if (currCamState != CameraState.Thermal)
-					{
-						currCamState = CameraState.Thermal;
-						thermalCamera.SetActive(true);
-					}
-					else
-					{
-						mainCamera.SetActive(true);
-						currCamState = CameraState.Normal;
-
-					}
+                    thermalCamera.SetActive(true);
 					break;
 				case CameraState.UV:
-					if (currCamState != CameraState.UV)
-					{
-						currCamState = CameraState.UV;
-						UVCamera.SetActive(true);
-					}
-					else
-					{
-						mainCamera.SetActive(true);
-						currCamState = CameraState.Normal;
-
-					}
+					UVCamera.SetActive(true);
 					break;
-
+                case CameraState.Normal:
+                    mainCamera.SetActive(true);
+                    break;
 			}
 		}
+
 		void DisableCameras()
 		{
 			UVCamera.SetActive(false);

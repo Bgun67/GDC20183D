@@ -78,14 +78,26 @@ namespace GDC
         {
             if (_states.Count != 0)
             {
-                _states.Peek().Update();
+                _states.Peek().FixedUpdate();
             }
 
             foreach(Effect effect in _effects)
             {
-                effect.Update();
+                effect.FixedUpdate();
+            }
+        }
+
+        public void ProcessStateFast()
+        {
+            if (_states.Count != 0)
+            {
+                _states.Peek().Update();
             }
 
+            foreach (Effect effect in _effects)
+            {
+                effect.Update();
+            }
         }
         
         public State GetActiveState()

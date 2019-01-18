@@ -16,6 +16,11 @@ namespace GDC
             _rb = player.GetComponent<Rigidbody>();
         }
         
+        public virtual void FixedUpdate()
+        {
+
+        }
+
         public virtual void Update()
         {
 
