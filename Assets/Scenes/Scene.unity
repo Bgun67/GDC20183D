@@ -643,7 +643,7 @@ GameObject:
   m_Layer: 0
   m_Name: Cover
   m_TagString: Untagged
-  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -660,7 +660,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: 0
   height: 2
-  peak: {x: -1, y: 0, z: 0}
+  peek: {x: 0, y: 0, z: 0}
 --- !u!4 &730582283
 Transform:
   m_ObjectHideFlags: 0
@@ -1432,7 +1432,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22400762, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000030517578
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22331464, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 2}
       propertyPath: m_AdditionalShaderChannelsFlag
