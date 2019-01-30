@@ -16,6 +16,9 @@ namespace GDC
         [SerializeField] Vector2 sensitivity = new Vector2(1, .7f);
         [SerializeField] Vector2 smoothing = new Vector2(2, 2);
 
+        protected Vector3 vel = Vector3.zero;
+        //camera 
+
         public GameplayState(Player player) : base(player)
         {
             
@@ -96,6 +99,11 @@ namespace GDC
 
             var yRotation = Quaternion.AngleAxis(mouseAbsolute.x, Vector3.up);
             _player.transform.localRotation = yRotation * targetCharacterOrientation;
+
+
+            var xRotation = Quaternion.AngleAxis(mouseAbsolute.y, Vector3.left);
+            _player.CameraRig.transform.localRotation = xRotation;
+            _player.CameraRig.transform.localPosition = Vector3.SmoothDamp(_player.CameraRig.transform.localPosition, _player.cameraRotatePoint + xRotation * _player.cameraOffset, ref vel, .1f); ;// _player.cameraRotatePoint + xRotation * _player.cameraOffset;
         }
     }
 }

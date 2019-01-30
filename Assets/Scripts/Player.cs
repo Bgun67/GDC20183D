@@ -28,6 +28,9 @@ namespace GDC
 		public GameObject UVCamera;
 		public GameObject thermalCamera;
 
+        public Vector3 cameraOffset;
+        public Vector3 cameraRotatePoint;
+
         MoveType    currMoveType = MoveType.run;
 		CameraState currCamState = CameraState.Normal;
 
